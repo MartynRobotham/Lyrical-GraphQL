@@ -1,6 +1,7 @@
 import React from 'react';
 import gql from "graphql-tag"; // Helper library to write graphql queries in js / ts file
 import {graphql} from "react-apollo";
+import { Link } from "react-router";
 
 const query = gql`
     {
@@ -18,12 +19,17 @@ const SongList = (props) => {
             return <li className='collection-item' key={song.id}>{song.title}</li>
         })
     }
-    console.log(props.data);
+
     if(!props.data.loading) {
         return (
+            <div>
             <ul className='collection'>
                 {renderSongs()}
             </ul>
+                <Link to='/song/new' className='btn-floating btn-large red right' onlyActiveOnIndex>
+                    <i className='material-icons'>add</i>
+                </Link>
+            </div>
         );
     }
     else {
