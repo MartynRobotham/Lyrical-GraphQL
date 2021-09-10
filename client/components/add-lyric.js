@@ -1,11 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {addLyric} from "../mutations/lyrical-mutations";
+import fetchSongs from "../queries/lyrical-queries";
+import {hashHistory} from "react-router";
+import {graphql} from "react-apollo";
 
-const AddLyric = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+class AddLyric extends Component {
+constructor(props) {
+    super(props);
+    this.state = {
+        content: ''
+    }
+}
 
-export default AddLyric;
+    onSubmit(event) {
+        event.preventDefault();
+        debugger;
+        return this.props.mutate({
+            variables: {
+                content: this.state.content,
+                songId: this.props.songId
+            },
+        }).then(() => {
+            this.setState({content: ''})
+            hashHistory.push('/')
+        }).catch(() => {
+            throw new Error('Mutation did not call correctly');
+        })
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.onSubmit.bind(this)}>
+                <label>Add lyric</label>
+                <input
+                    value={this.state.content}
+                    onChange={(e) => this.setState({content: e.target.value})} />
+            </form>
+        )
+    }
+}
+
+export default graphql(addLyric)(AddLyric);

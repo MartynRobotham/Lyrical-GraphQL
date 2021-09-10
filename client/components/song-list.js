@@ -15,10 +15,12 @@ const SongList = (props) => {
 
     const renderSongs = () => {
         return props.data.songs.map(({id, title}) => {
-            return <li className='collection-item' key={id}>
+            return <li className='collection-item'
+                key={id}>
+                <Link to={`/song/${id}`}>
                 {title}
-                <i
-                    className='material-icons'
+                </Link>
+                <i className='material-icons'
                     onClick={() => onSongDelete(id)}
                 >delete</i>
             </li>

@@ -6,3 +6,7 @@
 .material-icons {
     cursor: pointer;
 }
+
+.p-1 {
+    padding: 1rem;
+}

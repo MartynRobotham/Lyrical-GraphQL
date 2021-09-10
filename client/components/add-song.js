@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import gql from "graphql-tag"; // Helper library to write graphql queries in js / ts file
 import {graphql} from "react-apollo";
 import {Link, hashHistory} from "react-router";
 import fetchSongs from "../queries/lyrical-queries";
@@ -32,7 +31,7 @@ class AddSong extends Component {
 
     render() {
         return (
-            <div style={{padding: '2rem'}}>
+            <div className='p-1'>
                 <Link to='/'>Back</Link>
                 <h3>Create a new song</h3>
                 <form onSubmit={this.onSubmit.bind(this)}>

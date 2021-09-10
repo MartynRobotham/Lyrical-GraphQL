@@ -15,3 +15,12 @@ export const getSongs = gql`
         }
     }
 `;
+
+export const getLyrics = gql`
+    query getLyric($songId: ID!) {
+        lyric(id: $songId) {
+            id
+            content
+        }
+    }
+`;
