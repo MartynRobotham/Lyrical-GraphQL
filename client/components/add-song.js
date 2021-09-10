@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import gql from "graphql-tag"; // Helper library to write graphql queries in js / ts file
 import {graphql} from "react-apollo";
 import {Link, hashHistory} from "react-router";
+import fetchSongs from "../queries/lyrical-queries";
+import {addSong} from "../mutations/lyrical-mutations";
 
 // Old way as this app is < V16. Do it through hooks and RSC now!
 class AddSong extends Component {
@@ -18,7 +20,7 @@ class AddSong extends Component {
                 variables: {
                     title: this.state.title
                 },
-                refetchQueries: [{}] // Forces these queries to run again i.e. not get the cached songs
+                refetchQueries: [{query: fetchSongs}] // Forces these queries to run again i.e. not get the cached songs
             }).then(() => {
                 hashHistory.push('/')
             }).catch(() => {
@@ -42,12 +44,4 @@ class AddSong extends Component {
     }
 }
 
-const mutation = gql`
-    mutation AddSong ($title: String) {
-        addSong(title: $title) {
-            title
-        }
-    }
-`;
-
-export default graphql(mutation)(AddSong);
+export default graphql(addSong)(AddSong);
