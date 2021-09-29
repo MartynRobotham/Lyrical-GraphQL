@@ -7,12 +7,12 @@ import LyricList from "./lyric-list";
 
 const SongDetail = (props) => {
     const {loading, song} = props.data;
-    if(!loading) {
+    if(!loading && song !== undefined) {
         return (
             <div className='p-1'>
                 <Link to='/'>Back</Link>
                 <h3>Lyrics for {song.title}</h3>
-                <LyricList />
+                <LyricList lyrics={song.lyrics} />
                 <AddLyric songId={props.params.id} />
             </div>
         );

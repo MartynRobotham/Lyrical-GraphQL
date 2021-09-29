@@ -7,8 +7,12 @@ import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import App from "./components/app";
 import AddSong from "./components/add-song";
 import SongDetail from "./components/song-detail";
-const client = new ApolloClient({});
 import './style/style.css';
+
+const client = new ApolloClient({
+    // On update, gets associated parent ID's and updates them accordingly
+    dataIdFromObject: value => value.id
+});
 
 const Root = () => {
   return (

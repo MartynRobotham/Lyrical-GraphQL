@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {addLyric} from "../mutations/lyrical-mutations";
-import fetchSongs from "../queries/lyrical-queries";
 import {hashHistory} from "react-router";
 import {graphql} from "react-apollo";
 
@@ -14,7 +13,6 @@ constructor(props) {
 
     onSubmit(event) {
         event.preventDefault();
-        debugger;
         return this.props.mutate({
             variables: {
                 content: this.state.content,
@@ -22,7 +20,6 @@ constructor(props) {
             },
         }).then(() => {
             this.setState({content: ''})
-            hashHistory.push('/')
         }).catch(() => {
             throw new Error('Mutation did not call correctly');
         })
